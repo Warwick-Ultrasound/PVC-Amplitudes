@@ -75,7 +75,7 @@ The inputs and outputs to this function are the same as for solid_solid_boundary
 
 Calculates the amplitudes of reflected longitudinal and refracted longitudinal and shear waves at a material interface when the incidence medium is a liquid and the refraction medium is a solid.
 
-The inputs and outputs to this function are the same as for solid_solid_boundary, only any shear quantities relating to the liquid are omitted.
+The inputs and outputs to this function are the same as for solid_solid_boundary, only any shear quantities relating to the liquid are omitted and only longitudinal incident waves are possible.
 
 ### attenuate.m
 
