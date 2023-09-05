@@ -80,20 +80,6 @@ for ii = 1:length(theta0)
 
 end
 
-figure;
-plot(theta0, A_PVC);
-xlabel("Wedge Angle /^\circ");
-ylabel("Relative amplitude");
-legend('LL', 'LS', 'SL', 'SS');
-title("PVC Pipe");
-
-figure;
-plot(theta0, A_steel);
-xlabel("Wedge Angle /^\circ");
-ylabel("Relative amplitude");
-legend('LL', 'LS', 'SL', 'SS');
-title("Steel Pipe");
-
 % create composite figure with both panels
 figure;
 t = tiledlayout(2, 1, 'TileSpacing', 'none');

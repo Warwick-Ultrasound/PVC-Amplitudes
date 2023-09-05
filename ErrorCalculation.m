@@ -1,9 +1,6 @@
 %{
-Did some maths on 18/08/23 to work out how in the error is that you
-introduce by putting the transducers in the correct location for an SS path
-when you're actually getting the LL path.If I put all the matsh together
-it'll look horrific so I'm programming it instead to give some insight as
-to how it behaves whenyou change different parameters.
+A script which calculates the error introduced to a flow measurement if the
+transducers are placed for the SS path but only the LL path is detected.
 %}
 
 clear;
@@ -20,7 +17,7 @@ T.theta = 38; % wedge angle in degrees
 P.t = 4.7E-3; % wall thickness
 P.cl = 2351; % longitudinal speed in wall (currently PVC)
 P.cs = 1140; % shear speed in wall (currently PVC)
-P.OD = 63E-3;
+P.OD = 63E-3; % Exterior diameter
 P.ID = P.OD - 2*P.t; % interior diameter
 
 % water
@@ -83,10 +80,10 @@ function E = calc_error(T, P, W)
     theta_pLL = asind( P.cl/T.cl * sind(T.theta) ); % Snell's law for longitudinal wave into wall
     Z_wLL = 2*P.t*( tand(theta_pSS) - tand(theta_pLL) ) + 2*P.ID*tand(theta_wSS); % equation 18
     L_LL = sqrt( 4*P.ID^2 + Z_wLL^2 ); % equation 19
-    theta_wLL = acosd(2*P.ID/L_LL);
+    theta_wLL = acosd(2*P.ID/L_LL); % equation 20
 
 
-    E = L_LL*sind(theta_wLL)/(L_SS*sind(theta_wSS)) - 1;
+    E = L_LL*sind(theta_wLL)/(L_SS*sind(theta_wSS)) - 1; % equation 13
     
 
 end

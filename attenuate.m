@@ -7,7 +7,7 @@ function A2 = attenuate(A1, alpha, d)
     % It ouputs the amplitude after having travelled the distance through
     % the medium.
 
-    alpha = alpha*d; % actuyal attenuation over d in dB
+    alpha = alpha*d; % actual attenuation over d in dB
 
     A2 = A1*10^(alpha/20);
 end

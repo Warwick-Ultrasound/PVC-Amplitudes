@@ -72,5 +72,4 @@ function [A, theta] = solid_solid_boundary(m1, m2, theta0, f, inType)
     A = M\x;
 
     A = abs(A);
-%     theta = abs(real(theta));
 end
