@@ -129,13 +129,13 @@ A script that calculates the error introduced by setting the transducers in the 
 
 Calculates the longitudinal speed of sound c in water at a given temperature, T, from a quadratic fit of experimental data. For reference please see the article.
 
-### c_PEEK
+### c_PEEK.m
 
 `c = c_PEEK(T)`
 
 Calculates the longitudinal speed of sound, c, in polyether-ether ketone (PEEK) at temperature T. Calculated using a fit of experimental data obtained by the authors.
 
-### c_PEEK_shear
+### c_PEEK_shear.m
 
 `c = c_PEEK_shear(T)`
 
