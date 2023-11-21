@@ -63,7 +63,7 @@ function [A, theta] = solid_solid_boundary(m1, m2, theta0, f, inType)
 
     % create other matrix
     if inType == "long" % NOTE: book has mistake for these: still using old notation from old version but have changed meaning of alphaL and T.
-        x = [-cosd(theta0), sind(theta0), k1L*rho1*c1L^2*cosd(2*theta0), -k1L*mu1*sind(2*theta0)].';
+        x = [-cosd(theta0), sind(theta0), k1L*rho1*c1L^2*cosd(2*alphaT), -k1L*mu1*sind(2*theta0)].';
     else
         x = [sind(theta0), cosd(theta0), -k1T*mu1*sind(2*theta0), -k1T*mu1*cosd(2*theta0)].';
     end

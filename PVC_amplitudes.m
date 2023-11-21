@@ -92,7 +92,7 @@ legend('LL', 'LS', 'SL', 'SS');
 set(gca, 'Xticklabel', []); % turn off tick labels for top plot
 set(gca, 'FontName', 'Times');
 set(gca, 'FontSize', 12);
-ylim([-0.05, 0.65]); % shift up slightly so you can see all lines
+ylim([-0.05, 0.8]); % shift up slightly so you can see all lines
 xlim([theta0(1), theta0(end)]);
 
 nexttile;
@@ -102,4 +102,4 @@ set(gca, 'FontSize', 12);
 xlabel("Wedge Angle /^\circ");
 legend('LL', 'LS', 'SL', 'SS');
 xlim([theta0(1), theta0(end)]);
-ylim([-0.002, 0.045]);
+ylim([-0.002, 0.065]);
