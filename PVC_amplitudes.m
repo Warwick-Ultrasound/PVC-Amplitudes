@@ -25,6 +25,12 @@ close all;
 theta0 = linspace(0, 55, 1000); % transducer angle
 f = 1E6; % frequency
 
+% set contact type between transducer and pipe
+% uncomment this for a solid bond e.g. epoxied to surface:
+contactType = "rigid";
+% uncomment this for a slip bond e.g. gel couplant:
+%contactType = "slip";
+
 % Enter material parameters
 
 T = 20; % temperature /degrees C
@@ -66,13 +72,13 @@ A_PVC = A_steel;
 
 for ii = 1:length(theta0)
 
-    [LL,LS, SL, SS] = relative_amplitudes(geom, PEEK, steel, water, f, theta0(ii));
+    [LL,LS, SL, SS] = relative_amplitudes(geom, PEEK, steel, water, f, theta0(ii), contactType);
     A_steel(ii,1) = LL;
     A_steel(ii,2) = LS;
     A_steel(ii,3) = SL;
     A_steel(ii,4) = SS;
 
-    [LL,LS, SL, SS] = relative_amplitudes(geom, PEEK, PVC, water, f, theta0(ii));
+    [LL,LS, SL, SS] = relative_amplitudes(geom, PEEK, PVC, water, f, theta0(ii), contactType);
     A_PVC(ii,1) = LL;
     A_PVC(ii,2) = LS;
     A_PVC(ii,3) = SL;
@@ -86,20 +92,22 @@ t = tiledlayout(2, 1, 'TileSpacing', 'none');
 %t.FontName = 'Times';
 
 nexttile;
-plot(theta0, A_PVC);
-ylabel(t, "Relative Amplitude", 'FontName', 'Times', 'FontSize', 14);
+plot(theta0, A_PVC*100);
+ylabel(t, "Relative Amplitude /%", 'FontName', 'Times', 'FontSize', 14);
 legend('LL', 'LS', 'SL', 'SS');
 set(gca, 'Xticklabel', []); % turn off tick labels for top plot
 set(gca, 'FontName', 'Times');
 set(gca, 'FontSize', 12);
-ylim([-0.05, 0.8]); % shift up slightly so you can see all lines
+ylim([-5, 70]); % shift up slightly so you can see all lines
 xlim([theta0(1), theta0(end)]);
 
 nexttile;
-plot(theta0, A_steel);
+plot(theta0, A_steel*100);
 set(gca, 'FontName', 'Times');
 set(gca, 'FontSize', 12);
 xlabel("Wedge Angle /^\circ");
 legend('LL', 'LS', 'SL', 'SS');
 xlim([theta0(1), theta0(end)]);
-ylim([-0.002, 0.065]);
+maxA = 100*max(A_steel(~isinf(A_steel)), [],'all');
+set(gca, 'YTick', round([0,0.5,1]*maxA, 2, 'significant'));
+%ylim([-0.002, 0.02]);
