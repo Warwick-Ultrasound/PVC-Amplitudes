@@ -15,8 +15,8 @@ T.theta = 38; % wedge angle in degrees
 
 % pipe
 P.t = 4.7E-3; % wall thickness
-P.cl = 2351; % longitudinal speed in wall (currently PVC)
-P.cs = 1140; % shear speed in wall (currently PVC)
+P.cl = 2352; % longitudinal speed in wall (currently PVC)
+P.cs = 1093; % shear speed in wall (currently PVC)
 P.OD = 63E-3; % Exterior diameter
 P.ID = P.OD - 2*P.t; % interior diameter
 
@@ -24,7 +24,7 @@ P.ID = P.OD - 2*P.t; % interior diameter
 W.cl = c_water(20); % longitudinal speed in water
 
 % vary wall thickness
-wall = linspace(1E-3, 20E-3, 100);
+wall = linspace(1E-3, 20E-3, 1000);
 E_wall = zeros(size(wall));
 org_t = P.t; % save original pipe wall thickness to change it back later
 for ii = 1:length(wall)

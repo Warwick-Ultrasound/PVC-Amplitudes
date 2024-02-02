@@ -19,7 +19,7 @@ function [LL, LS, SL, SS] = relative_amplitudes(geom, transducer, pipe, fluid, f
     if contactType == "rigid"
         transducer_contact = @solid_solid_boundary;
     elseif contactType == "slip"
-        transducer_contact = @ solid_solid_with_coupling;
+        transducer_contact = @solid_solid_with_coupling;
     else
         error("Incorrect contactType in relative_amplitudes function call.");
     end

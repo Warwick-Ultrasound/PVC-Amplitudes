@@ -9,6 +9,6 @@ function A2 = attenuate(A1, alpha, d)
 
     alpha = alpha*d; % actual attenuation over d in dB
 
-    A2 = A1*10^(alpha/20);
+    A2 = A1*10^(-alpha/20);
 end
 

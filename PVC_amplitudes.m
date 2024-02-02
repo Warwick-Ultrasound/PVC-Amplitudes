@@ -1,22 +1,7 @@
 % A script which calculates the amplitudes of all of the different pathways 
-% ultrasound can take in a clamp-on meter on a PVC pipe. Considers all combinations 
+% ultrasound can take in a clamp-on meter on a (U)PVC pipe. Considers all combinations 
 % of shear and longitudinal in the pipe wall: long-long, long-shear, shear-long
 % and shear-shear
-%
-% MATERIAL PROPERTY REFS (CORRESPOND TO LABELS IN LATEX)
-% [1] PEEK_G
-% [2] PVC_1
-% [3] PVC_2
-% [4] PVC_shear*
-% [5] water_sos
-% [6] water_density
-% [7] PVC_density
-% [8] steel_G
-% [9] steel_c
-% [10] steel_density
-% [11] steel_alphalong
-% [12] steel_alphashear
-% * Estimate based on figure, but limited experimental data availible
 
 clear;
 clc;
@@ -32,34 +17,33 @@ contactType = "rigid";
 %contactType = "slip";
 
 % Enter material parameters
-
 T = 20; % temperature /degrees C
 
 % PEEK
 PEEK.clong = c_PEEK(T);
 PEEK.cshear = c_PEEK_shear(T);
-PEEK.G = 1.52E9; % shear modulus [1]
-PEEK.rho = 1.285E3; % density [1]
+PEEK.G = 1.52E9;
+PEEK.rho = 1.285E3; 
 
 % PVC
-PVC.clong = 2351; % [2]
-PVC.cshear = 1140; % [2]
-PVC.G = 1.83E9; % [2]
-PVC.rho = 1380; % [7]
-PVC.alphaLong = 239*(f/1E6); % attenuation in dB/m  [3]
-PVC.alphaShear = 875; % [4]
+PVC.clong = 2352; 
+PVC.cshear = 1093; 
+PVC.G = 1.80E9; 
+PVC.rho = 1505; 
+PVC.alphaLong = 267;
+PVC.alphaShear = 553;
 
 % Steel SS316
-steel.clong = 5790; % [10]
-steel.cshear = 3220; % [9]
-steel.G = 79.2E9; % [8]
-steel.rho = 7870; % [10]
-steel.alphaLong = 8; % estimated from plot [12]
-steel.alphaShear = 8; % estimated from plot [12]
+steel.clong = 5790;
+steel.cshear = 3220; 
+steel.G = 79.2E9;
+steel.rho = 7870; 
+steel.alphaLong = 8;
+steel.alphaShear = 8;
 
 % water
-water.clong = c_water(T); % [5]
-water.rho = 1000; % [6]
+water.clong = c_water(T);
+water.rho = 1000;
 
 % pipe geometry struct
 geom.OD = 63E-3;
@@ -94,7 +78,7 @@ t = tiledlayout(2, 1, 'TileSpacing', 'none');
 nexttile;
 plot(theta0, A_PVC*100);
 ylabel(t, "Relative Amplitude /%", 'FontName', 'Times', 'FontSize', 14);
-legend('LL', 'LS', 'SL', 'SS');
+legend('LL', 'LS', 'SL', 'SS', 'Location', 'west');
 set(gca, 'Xticklabel', []); % turn off tick labels for top plot
 set(gca, 'FontName', 'Times');
 set(gca, 'FontSize', 12);
@@ -106,7 +90,7 @@ plot(theta0, A_steel*100);
 set(gca, 'FontName', 'Times');
 set(gca, 'FontSize', 12);
 xlabel("Wedge Angle /^\circ");
-legend('LL', 'LS', 'SL', 'SS');
+%legend('LL', 'LS', 'SL', 'SS');
 xlim([theta0(1), theta0(end)]);
 maxA = 100*max(A_steel(~isinf(A_steel)), [],'all');
 set(gca, 'YTick', round([0,0.5,1]*maxA, 2, 'significant'));
